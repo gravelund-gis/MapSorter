@@ -1,4 +1,4 @@
-# MapSorter
+# MapSorter v. 0.1
 Initially created for the Swedish University of Agricultural Sciences (SLU) at Alnarp and Uppsala.
 ----------------
 Developed using Python v. 3.6.2.
