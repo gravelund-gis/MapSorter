@@ -23,11 +23,20 @@ def map_sorter(directory_path):
 
 	# K-MEANS INERTIAS:
 	print("Input the maximum number of image groups/clusters, for graphing.\n"
-	      "Note that this value must not be higher than the number of images\n"
-	      "to be analyzed. The default is 10.\n")
+	      "Note that this value must *not* be higher than the number of images\n"
+	      "to be analyzed. If none is chosen, the number of clusters is set equal to\n"
+	      "the number of input images.\n")
 
-	kn = int(input("Enter maximum number of groups: ") or "10")
-	k = find_likely_number_of_groups(data_array, kn)
+	kn = int(input("Enter maximum number of groups: ") or len(image_list))
+
+	# Error catching for the cluster value:
+	if kn > len(image_list):
+		print("The maximum number of image groups/clusters must *not* be higher than\n"
+		      "the number of images to be analyzed. The number of clusters is set\n"
+		      "equal to the number of input images.\n")
+		kn = len(image_list)
+
+	k = find_likely_number_of_groups(data_array, kn) or len(image_list)
 
 	# K-MEANS MODELING:
 	# Create a K-Means instance with k clusters
@@ -46,7 +55,7 @@ def map_sorter(directory_path):
 
 if __name__ == '__main__':
 	try:
-		directory_path_static = r'E:\SLU\Grouping\clustering\0'
+		directory_path_static = r'E:\SLU\Grouping\clustering\junk_images'
 		directory_path = str(input("\nEnter full path to image directory: \n") or directory_path_static)
 		# NOTE: If a static image directory path is desired, enter it above and simply hit Enter when prompted.
 		# Otherwise, enter the desired path when prompted.
